@@ -19,9 +19,9 @@ const Message = ({ email }) => {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
       onClick={openMail}
-      className="flex items-start justify-between border-b border-gray-200 px-4 py-2 text-sm hover:shadow-md "
+      className="flex items-start justify-between border-b border-gray-200 px-4 py-2 text-sm hover:shadow-md  "
     >
-      <div className="flex items-center gap-3">
+      <div className="flex items-center gap-1 md:gap-2 lg:gap-3">
         <div className="flex-none text-gray-300">
           <MdCropSquare className="w-5 h-5" />
         </div>
@@ -33,12 +33,12 @@ const Message = ({ email }) => {
         </div>
       </div>
       <div className="flex-1 ml-4">
-        <p className="text-gary-600 truncate inline-block max-w-full">
+        <p className="text-gary-600 truncate hidden md:block">
           {email.message}
         </p>
       </div>
       <div className="flex-none text-gray-400 text-sm">
-        <p> {new Date(email.createdAt?.toDate()).toUTCString()} </p>
+        <p className="hidden lg:block"> {new Date(email.createdAt?.toDate()).toUTCString()} </p>
       </div>
     </motion.div>
   );

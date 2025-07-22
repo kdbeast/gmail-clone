@@ -68,18 +68,18 @@ const Mail = () => {
             <MdOutlineAddTask size={"20px"} />
           </div>
           <div className="p-2 rounded-full hover:bg-gray-100 cursor-pointer">
-            <MdOutlineDriveFileMove size={"20px"} />
+            <MdOutlineDriveFileMove size={"20px"} className="hidden md:block" />
           </div>
           <div className="p-2 rounded-full hover:bg-gray-100 cursor-pointer">
-            <IoMdMore size={"20px"} />
+            <IoMdMore size={"20px"} className="hidden md:block" />
           </div>
         </div>
         <div className="flex items-center gap-2">
           <button className="hover:bg-gray-100 p-2 hover:rounded-full flex">
-            <MdKeyboardArrowLeft size={"20px"} />
+            <MdKeyboardArrowLeft size={"20px"} className="hidden md:block" />
           </button>
           <button className="hover:bg-gray-100 p-2 hover:rounded-full flex">
-            <MdKeyboardArrowRight size={"20px"} />
+            <MdKeyboardArrowRight size={"20px"} className="hidden md:block" />
           </button>
         </div>
       </div>
@@ -89,7 +89,7 @@ const Mail = () => {
             <h1 className="text-xl font-medium">{selectedEmail?.subject}</h1>
             <span className="text-sm bg-gray-200 px-2 rounded-md">Inbox</span>
           </div>
-          <div className="flex-none text-gray-400 text-sm my-5">
+          <div className="flex-none text-gray-400 text-sm my-5 hidden md:block">
             <p>
               {new Date(selectedEmail?.createdAt?.seconds * 1000).toUTCString()}
             </p>
@@ -99,8 +99,8 @@ const Mail = () => {
           <h1>{selectedEmail?.to}</h1>
           <span>to me</span>
         </div>
-        <div className="my-10">
-          <p> {selectedEmail?.message} </p>
+        <div className="my-5 ">
+          <p className="w-[80%]"> {selectedEmail?.message} </p>
         </div>
       </div>
     </motion.div>

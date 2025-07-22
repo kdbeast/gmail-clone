@@ -5,7 +5,7 @@ import { TbGridDots } from "react-icons/tb";
 import Avatar from "react-avatar";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setSearchText, setUser } from "../../utils/appSlice";
+import { setIsMenuOpen, setSearchText, setUser } from "../../utils/appSlice";
 import { AnimatePresence } from "framer-motion";
 import { auth } from "../../firebase";
 import { signOut } from "firebase/auth";
@@ -31,11 +31,18 @@ const Navbar = () => {
     dispatch(setSearchText(input));
   }, [input]);
 
+  const toogleMenuHandler = () => {
+    dispatch(setIsMenuOpen());
+  };
+
   return (
     <div className="flex items-center justify-between mx-3 h-16">
       <div className="flex items-center gap-10">
         <div className="flex items-center gap-2">
-          <div className="p-3 rounded-full hover:bg-gray-100 cursor-pointer">
+          <div
+            onClick={toogleMenuHandler}
+            className="p-3 rounded-full hover:bg-gray-100 cursor-pointer"
+          >
             <RxHamburgerMenu />
           </div>
           <img
@@ -58,7 +65,7 @@ const Navbar = () => {
           />
         </div>
       </div>
-      <div className="md:block hidden">
+      <div>
         <div className="flex items-center gap-1">
           <div className="p-2 rounded-full hover:bg-gray-100 cursor-pointer">
             <CiCircleQuestion size={"24px"} />

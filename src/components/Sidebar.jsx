@@ -1,17 +1,17 @@
 import { IoMdStar } from "react-icons/io";
-import { LuPencil } from "react-icons/lu";
+import { LuInbox, LuPencil } from "react-icons/lu";
 import { TbSend2 } from "react-icons/tb";
 import {
   MdOutlineWatchLater,
   MdOutlineDrafts,
   MdOutlineKeyboardArrowDown,
 } from "react-icons/md";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setOpen } from "../utils/appSlice";
 
 const sidebarItems = [
   {
-    icon: <LuPencil size={"24px"} />,
+    icon: <LuInbox size={"24px"} />,
     text: "Inbox",
   },
   {
@@ -38,31 +38,64 @@ const sidebarItems = [
 
 const Sidebar = () => {
   const dispatch = useDispatch(true);
+  const { isMenuOpen } = useSelector((state) => state.appSlice);
+
+  if (!isMenuOpen)
+    return (
+      <div className="w-[13%]">
+        <>
+          <div className="p-3">
+            <button
+              onClick={() => dispatch(setOpen(true))}
+              className="flex items-center gap-2 bg-[#C2E7FF] hover:shadow-md rounded-2xl p-4"
+            >
+              <LuPencil size="24px" />
+            </button>
+          </div>
+          <div className="text-gray-500">
+            {sidebarItems.map((item) => {
+              return (
+                <div
+                  key={item.text}
+                  className="flex items-center gap-4 pl-6 py-1 rounded-r-full hover:bg-gray-200 cursor-pointer my-2"
+                >
+                  <span>{item.icon}</span>
+                </div>
+              );
+            })}
+          </div>
+        </>
+      </div>
+    );
 
   return (
-    <div className="w-[15%]">
-      <div className="p-3">
-        <button
-          onClick={() => dispatch(setOpen(true))}
-          className="flex items-center gap-2 bg-[#C2E7FF] hover:shadow-md rounded-2xl p-4"
-        >
-          <LuPencil size="24px" />
-          Compose
-        </button>
-      </div>
-      <div className="text-gray-500">
-        {sidebarItems.map((item) => {
-          return (
-            <div
-              key={item.text}
-              className="flex items-center gap-4 pl-6 py-1 rounded-r-full hover:bg-gray-200 cursor-pointer my-2"
+    <div className="w-[15%] z-10 ">
+      {isMenuOpen && (
+        <>
+          <div className="p-3">
+            <button
+              onClick={() => dispatch(setOpen(true))}
+              className="flex items-center gap-2 bg-[#C2E7FF] hover:shadow-md rounded-2xl p-4"
             >
-              <span>{item.icon}</span>
-              <p>{item.text}</p>
-            </div>
-          );
-        })}
-      </div>
+              <LuPencil size="24px" />
+              Compose
+            </button>
+          </div>
+          <div className="text-gray-500">
+            {sidebarItems.map((item) => {
+              return (
+                <div
+                  key={item.text}
+                  className="flex items-center gap-4 pl-6 py-1 rounded-r-full hover:bg-gray-200 cursor-pointer my-2"
+                >
+                  <span>{item.icon}</span>
+                  <p>{item.text}</p>
+                </div>
+              );
+            })}
+          </div>
+        </>
+      )}
     </div>
   );
 };
